@@ -1,145 +1,118 @@
-﻿# realtime-employee-monitorization
-# distraction-detection-final-year-
+# 🚗 Vertic AI
+## Real-Time Vision-Based Drowsiness, Distraction & Microsleep Detection System
 
-Key Features & Technical Highlights
-1️⃣ Eye Aspect Ratio (EAR) — Blink & Microsleep Detection
+Vertic AI is a real-time computer vision system designed to monitor driver alertness and prevent fatigue-related accidents. The system detects **drowsiness, microsleep, yawning, excessive blinking, and visual distraction** using facial landmarks, head-pose estimation, and temporal reasoning.
 
-Computes EAR using facial landmark geometry
+This project emphasizes **physiologically accurate signals**, **temporal intelligence**, and **production-aware system design**.
 
-Differentiates between:
+---
 
-Short-term EAR drops → Blinks
+## 🔍 Key Features & Technical Highlights
 
-Sustained EAR drops → Microsleep
+### 1️⃣ Eye Aspect Ratio (EAR) — Blink & Microsleep Detection
+- Computes EAR using facial landmark geometry
+- Short-term EAR drop → Blink  
+- Sustained EAR drop → Microsleep
+- Combines **time-based thresholds with frame analysis**
+- Avoids naive frame-count heuristics
 
-Combines time-based thresholds with frame analysis, avoiding false positives
-✅ Professional-grade approach used in real-world fatigue monitoring systems
+---
 
-2️⃣ Mouth Aspect Ratio (MAR) — Yawn Detection
+### 2️⃣ Mouth Aspect Ratio (MAR) — Yawn Detection
+- Detects yawning using:
+  - Vertical lip distance
+  - Horizontal mouth width
+  - Sustained MAR threshold
+- Uses temporal validation to reduce false positives
 
-Detects yawning using:
+---
 
-Vertical lip distance
+### 3️⃣ Head Pose Estimation (PnP) — Distraction Detection
+- Implements full 3D head pose estimation using:
+  - `cv2.solvePnP()`
+  - `cv2.Rodrigues()`
+  - `cv2.RQDecomp3x3()`
+- Extracts:
+  - Pitch (up/down)
+  - Yaw (left/right)
+- Detects:
+  - Looking away
+  - Phone usage
+  - Prolonged distraction
 
-Horizontal mouth width
+---
 
-Sustained MAR threshold
+### 4️⃣ Temporal Intelligence — Sustained Distraction Logic
+- Uses time-based persistence instead of instant alerts
+- `SUSTAINED_DISTRACTION_TIME = 2.5` seconds
+- Short glance → No alert  
+- Continuous distraction → Alert
 
-Temporal validation ensures only real yawns trigger alerts
+---
 
-3️⃣ Head Pose Estimation (PnP) — Distraction Detection
+### 5️⃣ Microsleep Detection (Advanced Feature)
+Microsleep is detected when:
+- Eyes are closed
+- Head is facing forward
+- Closure duration exceeds a defined threshold
 
-A major differentiator of this project.
+This mimics real physiological microsleep behavior.
 
-Implemented full 3D head pose estimation using:
+---
 
-cv2.solvePnP()
+### 6️⃣ Priority-Based Risk Assessment System
+Driver state classification follows a hierarchical safety model:
 
-cv2.Rodrigues()
+1. Microsleep (highest risk)
+2. Yawning
+3. Excessive blinking
+4. Sustained distraction
+5. Attentive
 
-cv2.RQDecomp3x3()
+Critical risks always override lower-priority states.
 
-Extracted:
+---
 
-Pitch (up/down movement)
+### 7️⃣ Real-Time Alerts with Cross-Platform Audio
+- Windows → `winsound`
+- macOS → `afplay`
+- Linux → `paplay`
 
-Yaw (left/right movement)
+Ensures real-time feedback across operating systems.
 
-Classifies:
+---
 
-Looking away
+### 8️⃣ Intelligent Event-Based Logging
+- Logs only when the driver state changes
+- Prevents redundant per-frame logging
+- Produces clean, meaningful analytics data
 
-Phone usage
+---
 
-Prolonged visual distraction
+## 🛠 Tech Stack
+- Python
+- OpenCV
+- MediaPipe / Facial Landmarks
+- NumPy
+- Cross-platform OS utilities
 
-🔥 Many similar projects skip head pose entirely — Vertic AI does not.
+---
 
-4️⃣ Temporal Intelligence — Sustained Distraction Logic
-
-Uses time-based persistence, not instant detection
-
-Example:
-
-Short glance → ❌ No alert
-
-Continuous distraction > 2.5 seconds → ✅ Alert
-
-Dramatically reduces false positives in real-world usage
-
-5️⃣ Microsleep Detection (Advanced Feature)
-
-Microsleep detection is implemented using combined physiological signals:
-
-Eyes closed
-
-Head facing forward
-
-Duration exceeds threshold
-
-This mimics real human microsleep behavior, not just eye closure.
-🔥 This feature alone places Vertic AI above typical academic projects.
-
-6️⃣ Priority-Based Risk Assessment System
-
-Predictions follow a hierarchical safety-first logic:
-
-Microsleep (highest risk)
-
-Yawning
-
-Excessive blinking
-
-Sustained distraction
-
-Attentive
-
-This ensures critical risks override lower-priority states, reflecting real safety systems.
-
-7️⃣ Real-Time Alerts with Cross-Platform Audio Support
-
-Implemented platform-aware alerting:
-
-Windows → winsound
-
-macOS → afplay
-
-Linux → paplay
-
-Demonstrates production readiness, not student-only code.
-
-8️⃣ Intelligent Event-Based Logging
-
-Logs only when driver state changes
-
-Avoids:
-
-Redundant per-frame logging
-
-Large, unusable CSV files
-
-Enables clean analytics and long-term monitoring
-
-Shows strong systems and data engineering awareness.
-
-🧠 Why This Project Stands Out
-
-Combines computer vision + geometry + temporal logic
-
-Avoids naïve frame-count heuristics
-
-Designed with real-world deployment constraints in mind
-
-Demonstrates AI safety, perception, and systems thinking
-
-🛠 Tech Stack
-
-Python
-
-OpenCV
-
-MediaPipe / Facial Landmarks
-
-NumPy
-
-Cross-platform OS utilities
+## 🚀 Why Vertic AI?
+- Combines computer vision, geometry, and temporal reasoning
+- Avoids naive heuristics common in beginner projects
+- Designed with real-world deployment constraints in mind
+- Demonstrates safety-first and systems-level thinking
+
+---
+
+## 📌 Use Cases
+- Driver Monitoring Systems (DMS)
+- Fleet safety solutions
+- Automotive ADAS research
+- Real-time vision-based alertness monitoring
+
+---
+
+## 📄 License
+MIT License
